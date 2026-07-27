@@ -429,7 +429,7 @@ footer a span {
   }
 
   .section-heading h2 {
-    font-size: clamp(4rem, 22vw, 6rem);
+    font-size: clamp(3rem, 15vw, 4rem);
   }
 
   .project-grid {
