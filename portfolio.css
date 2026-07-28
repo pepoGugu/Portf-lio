@@ -519,6 +519,12 @@ footer a {
   box-shadow: 0 8px 18px rgb(15 48 43 / 6%);
 }
 
+.case-gallery figure:only-child {
+  width: min(100%, 780px);
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
 .case-gallery img {
   width: 100%;
   height: auto;
