@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Projeto de Pedro Augusto." />
+    <title>Projeto | Pedro Augusto</title>
+    <link rel="stylesheet" href="./portfolio.css?v=projects-and-wall" />
+  </head>
+  <body class="project-page">
+    <header class="site-header">
+      <a class="monogram" href="./index.html#inicio" aria-label="Pedro Augusto, inicio">PA</a>
+      <nav aria-label="Navegacao principal">
+        <a href="./index.html#trabalhos">Trabalhos</a>
+        <a href="./index.html#sobre">Sobre</a>
+        <a href="./index.html#inicio">Inicio</a>
+      </nav>
+    </header>
+
+    <main class="project-detail" id="inicio">
+      <div class="content-frame">
+        <a class="project-back" href="./index.html#trabalhos"><span aria-hidden="true">&larr;</span> Trabalhos</a>
+      </div>
+
+      <section class="content-frame project-detail-hero" aria-labelledby="project-title">
+        <div class="project-detail-copy">
+          <p class="eyebrow" id="project-type"></p>
+          <h1 id="project-title"></h1>
+          <p class="project-intro" id="project-intro"></p>
+        </div>
+        <div class="case-window">
+          <img id="project-image" src="" alt="" />
+        </div>
+      </section>
+
+      <section class="content-frame project-facts" aria-label="Detalhes do projeto">
+        <div>
+          <p>Formato</p>
+          <strong id="project-format"></strong>
+        </div>
+        <div>
+          <p>Foco</p>
+          <strong id="project-focus"></strong>
+        </div>
+      </section>
+
+      <section class="next-project">
+        <div class="content-frame">
+          <p class="eyebrow">Proximo</p>
+          <a id="next-project" href="./index.html#trabalhos">
+            <span id="next-project-title"></span>
+            <span aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Pedro Augusto</p>
+      <a href="./index.html#inicio">Voltar ao inicio <span aria-hidden="true">&uarr;</span></a>
+    </footer>
+
+    <script>
+      const projects = {
+        "conteudo-html": {
+          title: "Conteudo HTML",
+          type: "Design estatico",
+          image: "./public/projects/html-design-estatico.png",
+          intro: "Direcao visual para uma peca digital com contraste, recorte e presenca editorial.",
+          format: "Peca digital",
+          focus: "Composicao e direcao de arte"
+        },
+        "motion-design": {
+          title: "Motion Design",
+          type: "Animacao",
+          image: "./public/projects/motion-design.png",
+          intro: "Estudo de personagem e ritmo para uma cena curta, colorida e direta.",
+          format: "Frame de animacao",
+          focus: "Movimento e expressao"
+        },
+        "diagramacao": {
+          title: "Diagramacao",
+          type: "Editorial",
+          image: "./public/projects/diagramacao.jpg",
+          intro: "Pagina editorial com hierarquia clara, imagem e leitura organizada.",
+          format: "Pagina editorial",
+          focus: "Tipografia e ritmo"
+        },
+        "ambiente-3d": {
+          title: "Ambiente 3D",
+          type: "3D",
+          image: "./public/projects/ambiente-3d.png",
+          intro: "Exploracao de ambiente, escala e atmosfera em uma cena tridimensional.",
+          format: "Cena 3D",
+          focus: "Luz e composicao"
+        },
+        "efacil": {
+          title: "eFacil",
+          type: "Produto digital",
+          image: "./public/projects/efacil.png",
+          intro: "Interface pensada para orientar escolhas e manter a experiencia objetiva.",
+          format: "Interface digital",
+          focus: "Fluxo e interface"
+        },
+        "quem-sou-eu": {
+          title: "Quem sou eu?",
+          type: "Pessoal",
+          image: "./public/projects/quem-sou-eu.png",
+          intro: "Peca autoral que junta linguagem visual, identidade e experimentacao.",
+          format: "Projeto pessoal",
+          focus: "Identidade e narrativa"
+        }
+      };
+
+      const projectIds = Object.keys(projects);
+      const requestedId = new URLSearchParams(window.location.search).get("projeto");
+      const activeId = projects[requestedId] ? requestedId : projectIds[0];
+      const project = projects[activeId];
+      const nextId = projectIds[(projectIds.indexOf(activeId) + 1) % projectIds.length];
+      const next = projects[nextId];
+
+      document.title = `${project.title} | Pedro Augusto`;
+      document.querySelector("#project-type").textContent = project.type;
+      document.querySelector("#project-title").textContent = project.title;
+      document.querySelector("#project-intro").textContent = project.intro;
+      document.querySelector("#project-format").textContent = project.format;
+      document.querySelector("#project-focus").textContent = project.focus;
+      document.querySelector("#project-image").src = project.image;
+      document.querySelector("#project-image").alt = project.title;
+      document.querySelector("#next-project").href = `./projeto.html?projeto=${nextId}`;
+      document.querySelector("#next-project-title").textContent = next.title;
+    </script>
+  </body>
+</html>
