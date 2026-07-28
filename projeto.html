@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Projeto de Pedro Augusto." />
     <title>Projeto | Pedro Augusto</title>
-    <link rel="stylesheet" href="./portfolio.css?v=projects-and-wall" />
+    <link rel="stylesheet" href="./portfolio.css?v=project-galleries" />
   </head>
   <body class="project-page">
     <header class="site-header">
@@ -44,6 +44,16 @@
         </div>
       </section>
 
+      <section class="content-frame project-gallery" aria-labelledby="gallery-title">
+        <p class="eyebrow" id="gallery-title">Galeria</p>
+        <div class="case-gallery" id="project-gallery"></div>
+      </section>
+
+      <section class="content-frame project-study-notes" id="project-study-notes" aria-labelledby="study-notes-title" hidden>
+        <p class="eyebrow" id="study-notes-title">Estudos</p>
+        <ul id="project-notes"></ul>
+      </section>
+
       <section class="next-project">
         <div class="content-frame">
           <p class="eyebrow">Proximo</p>
@@ -63,52 +73,86 @@
     <script>
       const projects = {
         "conteudo-html": {
-          title: "Conteudo HTML",
-          type: "Design estatico",
+          title: "Conteúdo HTML | Design Estático",
+          type: "Design estático",
           image: "./public/projects/html-design-estatico.png",
-          intro: "Direcao visual para uma peca digital com contraste, recorte e presenca editorial.",
+          intro: "Pecas digitais e estudos visuais reunidos no projeto original.",
           format: "Peca digital",
-          focus: "Composicao e direcao de arte"
+          focus: "Direcao de arte",
+          gallery: [
+            "./public/projects/cases/conteudo-html/01.webp",
+            "./public/projects/cases/conteudo-html/02.webp",
+            "./public/projects/cases/conteudo-html/03.webp"
+          ]
         },
         "motion-design": {
           title: "Motion Design",
           type: "Animacao",
           image: "./public/projects/motion-design.png",
-          intro: "Estudo de personagem e ritmo para uma cena curta, colorida e direta.",
-          format: "Frame de animacao",
-          focus: "Movimento e expressao"
+          intro: "Selecao de estudos de animacao e headers produzidos para diferentes marcas.",
+          format: "Estudos de animacao",
+          focus: "Motion e campanhas",
+          gallery: ["./public/projects/motion-design.png"],
+          notes: [
+            "Estudo para marca Diploko",
+            "Estudo Cestinha (eFacil)",
+            "Headers para Mattel, Barbie, Precon, Dove, Megatron, BIC, Dreamies, Deli e Apti"
+          ]
         },
         "diagramacao": {
-          title: "Diagramacao",
+          title: "Diagramação",
           type: "Editorial",
           image: "./public/projects/diagramacao.jpg",
-          intro: "Pagina editorial com hierarquia clara, imagem e leitura organizada.",
+          intro: "Paginas editoriais, estudos de grid e composicoes tipograficas do projeto original.",
           format: "Pagina editorial",
-          focus: "Tipografia e ritmo"
+          focus: "Tipografia e grid",
+          gallery: [
+            "./public/projects/cases/diagramacao/01.webp",
+            "./public/projects/cases/diagramacao/02.webp",
+            "./public/projects/cases/diagramacao/03.webp",
+            "./public/projects/cases/diagramacao/04.webp",
+            "./public/projects/cases/diagramacao/05.webp"
+          ]
         },
         "ambiente-3d": {
           title: "Ambiente 3D",
           type: "3D",
           image: "./public/projects/ambiente-3d.png",
-          intro: "Exploracao de ambiente, escala e atmosfera em uma cena tridimensional.",
+          intro: "Estudos de cena, materialidade e atmosfera tridimensional trazidos da galeria original.",
           format: "Cena 3D",
-          focus: "Luz e composicao"
+          focus: "Ambiente e luz",
+          gallery: [
+            "./public/projects/cases/ambiente-3d/01.webp",
+            "./public/projects/cases/ambiente-3d/02.webp",
+            "./public/projects/cases/ambiente-3d/03.webp",
+            "./public/projects/cases/ambiente-3d/04.webp",
+            "./public/projects/cases/ambiente-3d/05.webp",
+            "./public/projects/cases/ambiente-3d/06.webp"
+          ]
         },
         "efacil": {
-          title: "eFacil",
+          title: "eFácil",
           type: "Produto digital",
           image: "./public/projects/efacil.png",
-          intro: "Interface pensada para orientar escolhas e manter a experiencia objetiva.",
+          intro: "Pecas de comunicacao e interface desenvolvidas para o universo eFacil.",
           format: "Interface digital",
-          focus: "Fluxo e interface"
+          focus: "Campanhas e varejo",
+          gallery: [
+            "./public/projects/cases/efacil/01.webp",
+            "./public/projects/cases/efacil/02.webp",
+            "./public/projects/cases/efacil/03.webp",
+            "./public/projects/cases/efacil/04.webp",
+            "./public/projects/cases/efacil/05.webp"
+          ]
         },
         "quem-sou-eu": {
-          title: "Quem sou eu?",
+          title: "Quem Sou Eu?",
           type: "Pessoal",
           image: "./public/projects/quem-sou-eu.png",
-          intro: "Peca autoral que junta linguagem visual, identidade e experimentacao.",
+          intro: "Projeto autoral com a peca original em destaque.",
           format: "Projeto pessoal",
-          focus: "Identidade e narrativa"
+          focus: "Ilustracao digital",
+          gallery: ["./public/projects/cases/quem-sou-eu/01.webp"]
         }
       };
 
@@ -129,6 +173,28 @@
       document.querySelector("#project-image").alt = project.title;
       document.querySelector("#next-project").href = `./projeto.html?projeto=${nextId}`;
       document.querySelector("#next-project-title").textContent = next.title;
+
+      const gallery = document.querySelector("#project-gallery");
+      project.gallery.forEach((source, index) => {
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        image.src = source;
+        image.alt = `${project.title} - imagem ${index + 1}`;
+        image.loading = "lazy";
+        figure.append(image);
+        gallery.append(figure);
+      });
+
+      if (project.notes) {
+        const notesSection = document.querySelector("#project-study-notes");
+        const notes = document.querySelector("#project-notes");
+        project.notes.forEach((note) => {
+          const item = document.createElement("li");
+          item.textContent = note;
+          notes.append(item);
+        });
+        notesSection.hidden = false;
+      }
     </script>
   </body>
 </html>
