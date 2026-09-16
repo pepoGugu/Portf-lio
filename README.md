@@ -10,7 +10,7 @@ Versão local, estática e pronta para o GitHub Pages. Não depende de instalaç
 4. Em **Build and deployment**, escolha **Deploy from a branch**, selecione a branch `main` e a pasta `/(root)`.
 5. Salve. O GitHub mostrará o endereço público do portfólio em alguns minutos.
 
-Os vídeos foram mantidos nos formatos originais recebidos (.mp4, .mov e .mkv). MP4 costuma funcionar melhor diretamente no navegador. Os demais continuam disponíveis para abrir ou baixar pelo portfólio.
+As imagens e os vídeos foram preparados nos formatos WebP e WebM quando aplicável, priorizando compatibilidade e carregamento no navegador.
 
 ## Revisão antes de publicar
 
