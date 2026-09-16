@@ -2,7 +2,15 @@
   const site = document.querySelector('#site-content');
   const gate = document.querySelector('#language-gate');
   const base = 'assets/media/';
-  let currentLanguage = 'pt';
+  const savedLanguage = (() => {
+    try {
+      const language = window.localStorage.getItem('portfolio-language');
+      return ['pt', 'en'].includes(language) ? language : null;
+    } catch {
+      return null;
+    }
+  })();
+  let currentLanguage = savedLanguage || 'pt';
 
   const ui = {
     pt: {
@@ -10,7 +18,7 @@
       pageTitle: 'Pedro Augusto — Portfólio',
       description: 'Portfólio de Pedro Augusto — web design, UX/UI, motion, 3D e tratamento de imagens.',
       navLabel: 'Navegação principal',
-      nav: ['Lab', 'Web', 'Motion', '3D', 'Imagem'],
+      nav: ['Lab', 'Web', 'Motion', '3D', 'Imagem', 'Contato'],
       switchLabel: 'PT / EN',
       switchAria: 'Alterar idioma',
       eyebrow: 'Portfólio profissional · 2026',
@@ -45,7 +53,7 @@
       pageTitle: 'Pedro Augusto — Portfolio',
       description: 'Pedro Augusto’s portfolio — web design, UX/UI, motion design, 3D and image processing.',
       navLabel: 'Primary navigation',
-      nav: ['Lab', 'Web', 'Motion', '3D', 'Image'],
+      nav: ['Lab', 'Web', 'Motion', '3D', 'Image', 'Contact'],
       switchLabel: 'PT / EN',
       switchAria: 'Change language',
       eyebrow: 'Professional portfolio · 2026',
@@ -207,7 +215,7 @@
     document.documentElement.lang = text.lang;
     document.title = text.pageTitle;
     document.querySelector('meta[name="description"]').setAttribute('content', text.description);
-    site.innerHTML = `<header id="top"><nav class="nav shell" aria-label="${text.navLabel}"><a class="brand" href="#top"><span class="brand-mark">P</span>Pedro Augusto</a><div class="nav-links"><a href="#layout-lab">${text.nav[0]}</a><a href="#estatico">${text.nav[1]}</a><a href="#motion">${text.nav[2]}</a><a href="#tresd">${text.nav[3]}</a><a href="#tratativa">${text.nav[4]}</a><button class="language-switch" type="button" data-open-language aria-label="${text.switchAria}">${text.switchLabel}</button></div></nav></header><main><section class="hero"><div class="shell hero-grid"><div><p class="eyebrow">${text.eyebrow}</p><h1>${text.heroTitle}</h1><p class="copy">${text.heroCopy}</p><div class="actions"><a class="button button-primary" href="#layout-lab">${text.projects}</a><a class="button" href="mailto:cactusrustinc@gmail.com">cactusrustinc@gmail.com</a><a class="button" href="https://www.linkedin.com/in/pedro-augusto-ba0465381" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div></div><div class="hero-aside"><img class="hero-portrait" src="assets/media/Pedro Augusto.jpg" alt="${text.portraitAlt}"><aside class="hero-card"><p>${text.current}</p><strong>${text.role}</strong><div class="tags"><span class="tag">UX/UI</span><span class="tag">${text.enriched}</span><span class="tag">Motion</span><span class="tag">Blender</span><span class="tag">Photoshop</span></div></aside></div></div></section>${renderCatalog(text)}<section class="resume anchor" id="curriculo"><div class="shell resume-box"><div><p class="eyebrow">${text.resumeEyebrow}</p><h2>${text.resumeTitle}</h2><p>${text.resumeCopy}</p></div><a class="button button-primary" href="${text.resumeHref}" target="_blank" rel="noreferrer">${text.resumeLink}</a></div></section></main><footer><div class="shell"><span>${text.footer}</span><span>${text.footerAreas}</span></div></footer><dialog id="viewer" aria-labelledby="viewer-title"><div class="dialog-media" id="viewer-media"></div><div class="dialog-info"><div><strong id="viewer-title">${text.file}</strong><span id="viewer-type">${text.portfolioMedia}</span></div><div class="dialog-actions"><button class="close" type="button" id="viewer-close" aria-label="${text.closeViewer}">×</button></div></div></dialog>`;
+    site.innerHTML = `<header id="top"><nav class="nav shell" aria-label="${text.navLabel}"><a class="brand" href="#top"><span class="brand-mark">P</span>Pedro Augusto</a><div class="nav-links"><a href="#layout-lab">${text.nav[0]}</a><a href="#estatico">${text.nav[1]}</a><a href="#motion">${text.nav[2]}</a><a href="#tresd">${text.nav[3]}</a><a href="#tratativa">${text.nav[4]}</a><a href="#curriculo">${text.nav[5]}</a><button class="language-switch" type="button" data-open-language aria-label="${text.switchAria}">${text.switchLabel}</button></div></nav></header><main><section class="hero"><div class="shell hero-grid"><div><p class="eyebrow">${text.eyebrow}</p><h1>${text.heroTitle}</h1><p class="copy">${text.heroCopy}</p><div class="actions"><a class="button button-primary" href="#layout-lab">${text.projects}</a><a class="button" href="mailto:cactusrustinc@gmail.com">cactusrustinc@gmail.com</a><a class="button" href="https://www.linkedin.com/in/pedro-augusto-ba0465381" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div></div><div class="hero-aside"><img class="hero-portrait" src="assets/media/Pedro Augusto.jpg" alt="${text.portraitAlt}"><aside class="hero-card"><p>${text.current}</p><strong>${text.role}</strong><div class="tags"><span class="tag">UX/UI</span><span class="tag">${text.enriched}</span><span class="tag">Motion</span><span class="tag">Blender</span><span class="tag">Photoshop</span></div></aside></div></div></section>${renderCatalog(text)}<section class="resume anchor" id="curriculo"><div class="shell resume-box"><div><p class="eyebrow">${text.resumeEyebrow}</p><h2>${text.resumeTitle}</h2><p>${text.resumeCopy}</p></div><div class="actions" style="margin-top:0"><a class="button button-primary" href="${text.resumeHref}" target="_blank" rel="noreferrer">${text.resumeLink}</a><a class="button" href="https://www.linkedin.com/in/pedro-augusto-ba0465381" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div></div></section></main><footer><div class="shell"><span>${text.footer}</span><span>${text.footerAreas}</span></div></footer><dialog id="viewer" aria-labelledby="viewer-title"><div class="dialog-media" id="viewer-media"></div><div class="dialog-info"><div><strong id="viewer-title">${text.file}</strong><span id="viewer-type">${text.portfolioMedia}</span></div><div class="dialog-actions"><button class="close" type="button" id="viewer-close" aria-label="${text.closeViewer}">×</button></div></div></dialog>`;
     updateHeader();
   }
 
@@ -232,6 +240,11 @@
 
   function chooseLanguage(language) {
     currentLanguage = language;
+    try {
+      window.localStorage.setItem('portfolio-language', language);
+    } catch {
+      // The portfolio remains usable when browser storage is unavailable.
+    }
     renderSite();
     gate.hidden = true;
     document.body.classList.remove('language-select-open');
@@ -277,5 +290,11 @@
 
   renderSite();
   updateGateText();
-  window.setTimeout(() => document.querySelector('[data-language="pt"]').focus(), 0);
+  if (savedLanguage) {
+    gate.hidden = true;
+    document.body.classList.remove('language-select-open');
+    site.removeAttribute('aria-hidden');
+  } else {
+    window.setTimeout(() => document.querySelector('[data-language="pt"]').focus(), 0);
+  }
 })();
